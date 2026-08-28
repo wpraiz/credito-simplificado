@@ -3,99 +3,111 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b1220">
+<meta name="theme-color" content="#0369a1">
 <title>Crédito Simplificado — Evaloriza</title>
-<meta name="description" content="Descubra sua chance de aprovação e encontre o cartão de crédito certo para o seu perfil. Sem letra miúda.">
+<meta name="description" content="Descubra sua chance de aprovação e encontre o cartão de crédito certo para o seu perfil. Sem consulta ao CPF, sem letra miúda.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div id="app">
+
   <!-- ====================================================== BOAS-VINDAS -->
   <section class="tela ativa" id="t-inicio">
     <div class="capa">
       <div class="marca">
-        <span class="logo">CS</span>
-        <div>
-          <strong>Crédito Simplificado</strong>
-          <small>por Evaloriza</small>
-        </div>
+        <span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><strong>Crédito Simplificado</strong><small>por Evaloriza</small></div>
       </div>
-
       <h1>Descubra sua chance <em>antes</em> de pedir</h1>
-      <p class="lead">
-        Pedir cartão e levar não derruba seu score — mas gasta seu tempo e sua
-        paciência. Responda seis perguntas e veja onde você tem chance real.
-      </p>
-
+      <p class="lead">Seis perguntas, cerca de 40 segundos. Sem consulta ao seu CPF
+        e sem cadastro — as respostas ficam só no seu aparelho.</p>
       <ul class="promessas">
-        <li><b>Seis perguntas</b>, cerca de 40 segundos</li>
-        <li><b>Sem consulta ao seu CPF</b> — nada sai do seu aparelho</li>
-        <li><b>Sem letra miúda</b> — mostramos anuidade, renda mínima e as pegadinhas</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><b>Score de aprovação</b> calculado na hora, com os pesos abertos</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><b>As pegadinhas de cada cartão</b>, não só os benefícios</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><b>Comparação lado a lado</b> de dois cartões</li>
       </ul>
-
-      <button class="btn grande" data-ir="quiz">Começar</button>
-      <button class="btn texto" data-ir="lista">Ver todos os cartões</button>
-
-      <p class="aviso-legal">
-        Demonstração. Cartões e condições são fictícios, para avaliar a
-        experiência do produto.
-      </p>
+      <div class="capa-acoes">
+        <button class="btn grande" data-ir="quiz">Começar</button>
+        <button class="btn texto" data-tab="cartoes">Só quero ver os cartões</button>
+      </div>
+      <p class="legal">Demonstração — cartões, emissores e condições são fictícios.</p>
     </div>
   </section>
 
   <!-- ============================================================= QUIZ -->
   <section class="tela" id="t-quiz">
     <header class="topo">
-      <button class="voltar" id="q-voltar" aria-label="Voltar">←</button>
+      <button class="voltar" id="q-voltar" aria-label="Voltar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
       <div class="progresso"><div id="q-barra"></div></div>
       <span class="passo" id="q-passo"></span>
     </header>
     <div class="corpo" id="q-corpo"></div>
   </section>
 
-  <!-- ============================================================ SCORE -->
-  <section class="tela" id="t-score">
-    <header class="topo">
-      <button class="voltar" data-ir="inicio" aria-label="Voltar">←</button>
-      <h2>Sua chance de aprovação</h2>
+  <!-- ============================================================= HOME -->
+  <section class="tela com-tabs" id="t-home">
+    <header class="topo-app">
+      <div class="marca-mini"><span class="logo p"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><b>Crédito <span>Simplificado</span></b></div>
+      <button class="avatar" id="h-avatar">M</button>
     </header>
-    <div class="corpo" id="s-corpo"></div>
+    <div class="corpo" id="h-corpo"></div>
   </section>
 
-  <!-- ==================================================== RECOMENDAÇÕES -->
-  <section class="tela" id="t-lista">
-    <header class="topo">
-      <button class="voltar" id="l-voltar" aria-label="Voltar">←</button>
-      <h2 id="l-titulo">Cartões para você</h2>
-    </header>
+  <!-- ========================================================== CARTÕES -->
+  <section class="tela com-tabs" id="t-cartoes">
+    <header class="topo-app"><h2>Cartões</h2></header>
     <div class="filtros" id="l-filtros"></div>
     <div class="corpo" id="l-corpo"></div>
-    <footer class="barra-comparar" id="l-comparar" hidden>
-      <span id="l-selecao"></span>
-      <button class="btn pequeno" id="l-btn-comparar">Comparar</button>
-    </footer>
+  </section>
+
+  <!-- ========================================================= COMPARAR -->
+  <section class="tela com-tabs" id="t-comparar">
+    <header class="topo-app"><h2>Comparar</h2></header>
+    <div class="corpo" id="p-corpo"></div>
+  </section>
+
+  <!-- ============================================================= MENU -->
+  <section class="tela com-tabs" id="t-menu">
+    <header class="topo-app"><h2>Menu</h2></header>
+    <div class="corpo" id="m-corpo"></div>
+  </section>
+
+  <!-- ============================================== SCORE (tela cheia) -->
+  <section class="tela" id="t-score">
+    <header class="topo">
+      <button class="voltar" data-tab="home" aria-label="Voltar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
+      <h2>Seu score</h2>
+    </header>
+    <div class="corpo" id="s-corpo"></div>
   </section>
 
   <!-- ========================================================== DETALHE -->
   <section class="tela" id="t-cartao">
     <header class="topo">
-      <button class="voltar" data-ir="lista" aria-label="Voltar">←</button>
-      <h2>Detalhes do cartão</h2>
+      <button class="voltar" id="c-voltar" aria-label="Voltar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
+      <h2 id="c-titulo">Cartão</h2>
     </header>
     <div class="corpo" id="c-corpo"></div>
   </section>
 
-  <!-- ========================================================= COMPARAR -->
-  <section class="tela" id="t-comparar">
+  <!-- ====================================================== RESULTADO -->
+  <section class="tela" id="t-resultado">
     <header class="topo">
-      <button class="voltar" data-ir="lista" aria-label="Voltar">←</button>
+      <button class="voltar" data-tab="comparar" aria-label="Voltar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
       <h2>Comparação</h2>
     </header>
-    <div class="corpo" id="p-corpo"></div>
+    <div class="corpo" id="r-corpo"></div>
   </section>
-</div>
 
+  <!-- ========================================================== TAB BAR -->
+  <nav class="tabbar" id="tabbar" hidden aria-label="Navegação principal">
+    <button data-tab="home"><svg class="ic g" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>Início</span></button>
+    <button data-tab="cartoes"><svg class="ic g" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg><span>Cartões</span></button>
+    <button data-tab="comparar"><svg class="ic g" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg><span>Comparar</span></button>
+    <button data-tab="menu"><svg class="ic g" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg><span>Menu</span></button>
+  </nav>
+
+</div>
 <script type="module" src="app.js"></script>
 </body>
 </html>
