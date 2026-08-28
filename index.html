@@ -3,59 +3,120 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0369a1">
-<title>Crédito Simplificado — Evaloriza</title>
-<meta name="description" content="Descubra sua chance de aprovação e encontre o cartão de crédito certo para o seu perfil. Sem consulta ao CPF, sem letra miúda.">
+<meta name="theme-color" content="#ffffff">
+<title>Crédito Simplificado — descubra sua chance antes de pedir</title>
+<meta name="description" content="Responda 6 perguntas e veja sua chance real de aprovação em cada cartão. Sem consulta ao CPF, sem cadastro obrigatório.">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Crédito Simplificado">
+<meta property="og:description" content="Descubra sua chance de aprovação antes de pedir o cartão. 6 perguntas, 40 segundos, sem consulta ao CPF.">
+<meta property="og:image" content="https://wpraiz.github.io/credito-simplificado/og.png">
+<meta property="og:url" content="https://wpraiz.github.io/credito-simplificado/">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
 
-  <!-- ====================================================== BOAS-VINDAS -->
-  <section class="tela ativa" id="t-inicio">
-    <div class="capa">
-      <div class="marca">
-        <span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
-        <div><strong>Crédito Simplificado</strong><small>por Evaloriza</small></div>
-      </div>
-      <h1>Descubra sua chance <em>antes</em> de pedir</h1>
-      <p class="lead">Seis perguntas, cerca de 40 segundos. Sem consulta ao seu CPF
-        e sem cadastro — as respostas ficam só no seu aparelho.</p>
-      <ul class="promessas">
-        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><b>Score de aprovação</b> calculado na hora, com os pesos abertos</li>
-        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><b>As pegadinhas de cada cartão</b>, não só os benefícios</li>
-        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><b>Comparação lado a lado</b> de dois cartões</li>
-      </ul>
-      <div class="capa-acoes">
-        <button class="btn grande" data-ir="quiz">Começar</button>
-        <button class="btn texto" data-tab="cartoes">Só quero ver os cartões</button>
-      </div>
-      <p class="legal">Demonstração — cartões, emissores e condições são fictícios.</p>
+  <!-- ======================================================= ONBOARDING -->
+  <section class="tela ativa" id="t-intro">
+    <div class="ob-palco" id="ob-palco"></div>
+    <div class="ob-base">
+      <div class="pontos" id="ob-pontos"></div>
+      <h1 id="ob-titulo"></h1>
+      <p id="ob-texto"></p>
+      <button class="btn grande" id="ob-btn">Continuar</button>
+      <button class="btn texto" id="ob-pular">Pular apresentação</button>
     </div>
   </section>
 
   <!-- ============================================================= QUIZ -->
   <section class="tela" id="t-quiz">
     <header class="topo">
-      <button class="voltar" id="q-voltar" aria-label="Voltar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
-      <div class="progresso"><div id="q-barra"></div></div>
+      <button class="voltar" id="q-voltar" aria-label="Voltar"></button>
+      <div class="progresso" id="q-prog" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+           aria-valuenow="0" aria-label="Progresso do questionário"><div id="q-barra"></div></div>
       <span class="passo" id="q-passo"></span>
     </header>
     <div class="corpo" id="q-corpo"></div>
   </section>
 
+  <!-- ======================================================== ANALISANDO -->
+  <section class="tela" id="t-analise">
+    <div class="analise">
+      <div class="radar"><span></span><span></span><span></span><b id="an-pct">0%</b></div>
+      <h2>Analisando seu perfil</h2>
+      <ul class="etapas" id="an-etapas"></ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ SCORE -->
+  <section class="tela" id="t-score">
+    <header class="topo" id="s-topo">
+      <button class="voltar" data-tab="home" aria-label="Voltar"></button>
+      <h2>Seu score</h2>
+    </header>
+    <div class="corpo" id="s-corpo"></div>
+    <canvas id="confete" aria-hidden="true"></canvas>
+  </section>
+
+  <!-- ========================================================== CAPTURA -->
+  <section class="tela" id="t-captura">
+    <div class="corpo cap">
+      <div class="cap-ilu" id="cap-ilu"></div>
+      <h2>Salve seu resultado</h2>
+      <p class="sub">Guardamos seu score e avisamos quando surgir um cartão com
+        mais chance para o seu perfil.</p>
+      <form id="cap-form" novalidate>
+        <label class="campo">
+          <span>Como podemos te chamar?</span>
+          <input type="text" id="cap-nome" autocomplete="given-name" placeholder="Seu primeiro nome" required>
+        </label>
+        <label class="campo">
+          <span>E-mail</span>
+          <input type="email" id="cap-email" autocomplete="email" inputmode="email" spellcheck="false"
+                 placeholder="voce@email.com" aria-describedby="cap-erro" required>
+          <em class="erro" id="cap-erro" hidden></em>
+        </label>
+        <button class="btn grande acento" type="submit">Salvar meu resultado</button>
+      </form>
+      <button class="btn texto" id="cap-pular">Agora não, quero só ver os cartões</button>
+      <p class="legal">Não vendemos seus dados e não enviamos spam. Nesta demonstração
+        nada é enviado: fica tudo no seu aparelho.</p>
+    </div>
+  </section>
+
+  <!-- ====================================================== NOTIFICAÇÃO -->
+  <section class="tela" id="t-notif">
+    <div class="corpo cap">
+      <div class="notif-demo" id="notif-demo"></div>
+      <h2>Quer ser avisado?</h2>
+      <p class="sub">O mercado muda. Cartão que hoje exige renda alta pode baixar a
+        exigência amanhã — e a gente te avisa quando isso acontecer com um que
+        combina com você.</p>
+      <ul class="beneficios" id="notif-lista"></ul>
+      <button class="btn grande" id="notif-sim">Sim, quero ser avisado</button>
+      <button class="btn texto" id="notif-nao">Agora não</button>
+    </div>
+  </section>
+
   <!-- ============================================================= HOME -->
   <section class="tela com-tabs" id="t-home">
     <header class="topo-app">
-      <div class="marca-mini"><span class="logo p"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><b>Crédito <span>Simplificado</span></b></div>
-      <button class="avatar" id="h-avatar">M</button>
+      <div id="h-marca"></div>
+      <button class="avatar" id="h-avatar">?</button>
     </header>
     <div class="corpo" id="h-corpo"></div>
   </section>
 
   <!-- ========================================================== CARTÕES -->
   <section class="tela com-tabs" id="t-cartoes">
-    <header class="topo-app"><h2>Cartões</h2></header>
+    <header class="topo-app"><h2>Cartões</h2><span class="cont" id="l-cont"></span></header>
     <div class="filtros" id="l-filtros"></div>
     <div class="corpo" id="l-corpo"></div>
   </section>
@@ -72,41 +133,19 @@
     <div class="corpo" id="m-corpo"></div>
   </section>
 
-  <!-- ============================================== SCORE (tela cheia) -->
-  <section class="tela" id="t-score">
-    <header class="topo">
-      <button class="voltar" data-tab="home" aria-label="Voltar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
-      <h2>Seu score</h2>
-    </header>
-    <div class="corpo" id="s-corpo"></div>
-  </section>
-
   <!-- ========================================================== DETALHE -->
   <section class="tela" id="t-cartao">
     <header class="topo">
-      <button class="voltar" id="c-voltar" aria-label="Voltar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
+      <button class="voltar" id="c-voltar" aria-label="Voltar"></button>
       <h2 id="c-titulo">Cartão</h2>
     </header>
     <div class="corpo" id="c-corpo"></div>
   </section>
 
-  <!-- ====================================================== RESULTADO -->
-  <section class="tela" id="t-resultado">
-    <header class="topo">
-      <button class="voltar" data-tab="comparar" aria-label="Voltar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
-      <h2>Comparação</h2>
-    </header>
-    <div class="corpo" id="r-corpo"></div>
-  </section>
-
   <!-- ========================================================== TAB BAR -->
-  <nav class="tabbar" id="tabbar" hidden aria-label="Navegação principal">
-    <button data-tab="home"><svg class="ic g" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>Início</span></button>
-    <button data-tab="cartoes"><svg class="ic g" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg><span>Cartões</span></button>
-    <button data-tab="comparar"><svg class="ic g" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg><span>Comparar</span></button>
-    <button data-tab="menu"><svg class="ic g" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg><span>Menu</span></button>
-  </nav>
+  <nav class="tabbar" id="tabbar" hidden aria-label="Navegação principal"></nav>
 
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 </div>
 <script type="module" src="app.js"></script>
 </body>

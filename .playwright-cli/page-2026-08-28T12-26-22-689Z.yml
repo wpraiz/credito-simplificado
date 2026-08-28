@@ -1,0 +1,5 @@
+- generic [ref=f4e36]:
+  - heading "Descubra sua chance antes de pedir" [level=1] [ref=f4e41]
+  - paragraph [ref=f4e42]: "Pedir cartão e levar não é só frustrante: cada análise fica registrada. Veja onde você tem chance real primeiro."
+  - button "Continuar" [ref=f4e43] [cursor=pointer]
+  - button "Pular apresentação" [ref=f4e44] [cursor=pointer]

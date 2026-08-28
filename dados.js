@@ -198,11 +198,13 @@ export function calculaScore(r) {
   }
 }
 
+// `cor` pinta preenchimento e barra; `corTexto` é a variante que passa 4,5:1
+// (WCAG AA) sobre o fundo claro — as vivas reprovam em texto pequeno.
 export const FAIXAS = [
-  { min: 800, nome: 'Excelente', cor: '#16a34a', texto: 'Você tem perfil para pleitear os cartões premium da nossa base.' },
-  { min: 600, nome: 'Bom',       cor: '#65a30d', texto: 'Seu perfil casa com a maioria dos cartões intermediários. Há espaço para crescer.' },
-  { min: 400, nome: 'Regular',   cor: '#ea580c', texto: 'Comece por cartões sem anuidade para construir limite e melhorar gradualmente.' },
-  { min: 0,   nome: 'Atenção',   cor: '#dc2626', texto: 'Vale construir histórico primeiro. Cartão garantido é o caminho mais curto.' },
+  { min: 800, nome: 'Excelente', cor: '#16a34a', corTexto: '#15803d', texto: 'Você tem perfil para pleitear os cartões premium da nossa base.' },
+  { min: 600, nome: 'Bom',       cor: '#65a30d', corTexto: '#3f6212', texto: 'Seu perfil casa com a maioria dos cartões intermediários. Há espaço para crescer.' },
+  { min: 400, nome: 'Regular',   cor: '#ea580c', corTexto: '#9a3412', texto: 'Comece por cartões sem anuidade para construir limite e melhorar gradualmente.' },
+  { min: 0,   nome: 'Atenção',   cor: '#dc2626', corTexto: '#b91c1c', texto: 'Vale construir histórico primeiro. Cartão garantido é o caminho mais curto.' },
 ]
 
 export const faixaDe = (p) => FAIXAS.find((f) => p >= f.min)
