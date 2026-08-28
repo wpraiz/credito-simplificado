@@ -3,15 +3,17 @@
 Protótipo navegável do produto da Evaloriza. Comparador e recomendador de cartão
 de crédito, com score de aprovação estimado a partir do que o usuário declara.
 
-**Cartões, emissores e condições são fictícios.** Nada aqui foi copiado dos apps
-analisados em `apps/` — nem nome, nem copy, nem layout. O que se aproveitou do
-teardown foi **arquitetura e estratégia de produto**, que é o escopo do repo
-(ver [CLAUDE.md](../CLAUDE.md)).
+**Cartões, emissores e condições são fictícios** — servem para avaliar a
+experiência do produto, não para orientar decisão financeira de ninguém.
+
+O desenho deste app saiu de uma análise de concorrentes que vive em repositório
+separado e privado. Nada foi copiado de lá: nem nome, nem copy, nem layout. O
+que veio foi **arquitetura e estratégia de produto**.
 
 ## Rodar local
 
 ```bash
-npx serve demo        # ou qualquer servidor estático
+npx serve .           # ou qualquer servidor estático
 ```
 
 Precisa de servidor: o app usa módulos ES, que o `file://` bloqueia.
@@ -36,12 +38,11 @@ declarada é o diferencial defensável.
 consulta a birô, não há CPF, não há conta. Isso é dito na primeira tela porque é
 a objeção número um de quem já foi queimado por "simulador de crédito".
 
-**Sem gate de anúncio.** O teardown mostrou que os concorrentes travam a
-recomendação atrás de um rewarded ([spec 004](../docs/specs/004-ad-gate-rewarded-paywall.md)).
-Funciona para eles; aqui a decisão foi entregar o resultado e ganhar a confiança
-primeiro. Se um dia houver monetização, ela entra depois de o produto provar
-valor — e a arquitetura para isso está na
-[spec 001](../docs/specs/001-server-driven-ad-wrapper.md).
+**Sem gate de anúncio.** Os concorrentes analisados travam a recomendação atrás
+de um anúncio recompensado, cobrado logo depois de o usuário investir ~45s no
+questionário. Funciona para eles; aqui a decisão foi entregar o resultado e
+ganhar a confiança primeiro. Se um dia houver monetização, ela entra depois de o
+produto provar valor.
 
 ## O que falta para virar produto
 
